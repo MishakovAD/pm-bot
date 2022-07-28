@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service("EmailEventHandler")
 @Slf4j(topic = "EVENT_HANDLER.EMAIL")
-public class EmailEventHandler extends AbstractEventHandler<Object, Object> { //Вместо Object -> response type
+public class EmailEventHandler extends AbstractEventHandler<Object, Object> {
 
   @Override
   public Object handleEvent(EventDto<Object> eventDto) {

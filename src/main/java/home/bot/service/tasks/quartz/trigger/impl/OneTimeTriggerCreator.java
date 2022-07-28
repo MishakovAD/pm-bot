@@ -12,19 +12,18 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("oneTimeTrigger")
 @Slf4j(topic = "TRIGGER_CREATOR")
 public class OneTimeTriggerCreator implements TriggerCreatorService {
 
-  private static final String TRIGGER_NAME = "OneTimeTrigger";
   private static final String TRIGGER_GROUP = "OneTimeTrigger";
 
   @Override
-  public Trigger createTrigger(LocalDate startDate, LocalTime startTime) {
+  public Trigger createTrigger(String triggerName, LocalDate startDate, LocalTime startTime) {
     LOGGER.info("Start create onetime trigger. Execution date-time: {} : {}", startDate, startTime);
     LocalDateTime dateTime = LocalDateTime.of(startDate, startTime);
     return TriggerBuilder.newTrigger()
-        .withIdentity(TRIGGER_NAME + UUID.randomUUID(), TRIGGER_GROUP)
+        .withIdentity(triggerName, TRIGGER_GROUP)
         .startAt(Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant()))
         .build();
   }

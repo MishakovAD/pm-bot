@@ -8,10 +8,10 @@ spring:
       max-file-size: 30MB
       max-request-size: 30MB
   datasource:
-    url: jdbc:postgresql://localhost:5432/telegrambot
+    url: ${db_url}
     driverClassName: org.postgresql.Driver
-    username: telegrambotadmin
-    password: TelegramBotAdmin_123
+    username: ${db_username}
+    password: ${db_password}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     generate-ddl: true
@@ -46,12 +46,12 @@ camunda:
 telegram:
   #Можно научить словарю английского и обучению слов todo: идея
   api-url: 'https://api.telegram.org/'
-  webhook-path: 'https://da86-176-15-240-8.eu.ngrok.io'
-  token: '5108380387:AAHHeWBp-Qd-8Dix2ZNaOkJaRDoUteRBXzg'
-  name: '@Easy_StandUp_bot'
+  webhook-path: ''
+  token: ${telegram_token}
+  name: ${telegram_bot_name}
 
 mattermost:
-  bot-token: 'xsd4foph5pbfdxa49xwxrr3hza'
+  bot-token: ${mm_token}
   bot-id: '8hqo55ibi3b9feq93rstbxiu3c'
   host: 'http://127.0.0.1:8065'
   response-host: 'http://host.docker.internal:80'

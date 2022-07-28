@@ -37,15 +37,6 @@ public class RemoveUserTaskFinishMessageHandler<T, Y> extends
     //todo: реализовать
     BaseMattermostSubmitDialogRequest request = message.getMessage();
     Map<String, Object> fields = request.getSubmission();
-//    UserPointDto userPointDto = new UserPointDto();
-//    userPointDto.setUserId(request.getUserId());
-//    questions.entrySet()
-//        .stream()
-//        .filter(entry -> Objects.nonNull(entry.getValue()))
-//        .forEach(entry -> {
-//          MM_USER_POINTS_CREATE.get(entry.getKey()).accept(userPointDto, String.valueOf(entry.getValue()));
-//        });
-//    taskService.createTodayUserPoint(userPointDto);
     return null;
   }
 }

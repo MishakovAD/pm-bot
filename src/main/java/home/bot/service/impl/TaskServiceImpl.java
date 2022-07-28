@@ -14,16 +14,11 @@ import home.bot.service.tasks.creators.TaskCreator;
 import home.bot.service.tasks.executors.TaskExecutor;
 import home.bot.service.tasks.quartz.job.TaskMattermostJob;
 import home.bot.service.tasks.quartz.trigger.TriggerCreatorService;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +27,6 @@ import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,8 +61,6 @@ public class TaskServiceImpl implements TaskService {
   @Transactional
   public void scheduleQuartzTaskByEntity(Task task) {
     Trigger trigger = createQuartzTrigger(task.getPeriod(), task.getExecutionDate(), task.getExecutionTime());
-    //todo: возможно лист триггеров (в зависимости от периода) и выбирать
-    //todo: использовать сервис по созданию триггеров
     JobDataMap map = new JobDataMap();
     map.put(TASK_ID_KEY, task.getId());
     JobDetail jobDetail = JobBuilder.newJob()
@@ -110,10 +102,7 @@ public class TaskServiceImpl implements TaskService {
   }
 
   private Trigger createQuartzTrigger(TaskPeriod period, LocalDate executionDate, LocalTime executionTime) {
-    return TriggerBuilder.newTrigger()
-        .withIdentity("TRIGGER_NAME" + UUID.randomUUID(), "TRIGGER_GROUP")
-        .startAt(Date.from(LocalDateTime.of(executionDate, executionTime).atZone(ZoneId.systemDefault()).toInstant()))
-        .build();
+    return triggerCreators.get(period.getTriggerCreatorName()).createTrigger(, executionDate, executionTime);
   }
 
 //  @Override //выполнение скрипта + очистка quartz tables

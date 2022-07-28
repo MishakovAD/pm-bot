@@ -12,7 +12,5 @@ public class DoSomethingExecutor implements TaskExecutor {
   @Override
   public void execute(Task task) {
     LOGGER.info("Start execute anything task. Task: {}", task);
-    //любое другое задание, которое можно выполнить
-    //подумать, как таски разграничивать и универсально задавать, что нужно сделать
   }
 }

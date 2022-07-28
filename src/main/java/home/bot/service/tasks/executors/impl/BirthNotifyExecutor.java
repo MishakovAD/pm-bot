@@ -6,7 +6,6 @@ import home.bot.entity.Task;
 import home.bot.service.UserNotificationService;
 import home.bot.service.tasks.converters.BodyConverter;
 import home.bot.service.tasks.converters.dto.BirthdayTaskDto;
-import home.bot.service.tasks.converters.dto.TaskDto;
 import home.bot.service.tasks.executors.AbstractTaskExecutor;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +24,7 @@ public class BirthNotifyExecutor extends AbstractTaskExecutor {
   public void execute(Task task) {
     LOGGER.info("Start execute birthday notify task. Task: {}", task);
     BirthdayTaskDto bodyDto = getTaskBodyDto(task);
-    Long userId = bodyDto.getUserIdToRemind();
     NotificationSource source = bodyDto.getSource();
-//    userNotificationService.notifyByTask(source, new Message(, bodyDto.getMessage()));
+    userNotificationService.notifyByTask(source, new Message(bodyDto.getAddressId(), bodyDto.getMessage()));
   }
 }

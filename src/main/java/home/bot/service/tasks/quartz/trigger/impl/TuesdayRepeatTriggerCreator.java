@@ -12,18 +12,17 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("everyTuesdayTrigger")
 @Slf4j(topic = "TRIGGER_CREATOR")
 public class TuesdayRepeatTriggerCreator implements TriggerCreatorService {
 
-  private static final String TRIGGER_NAME = "TuesdayTrigger";
-  private static final String TRIGGER_GROUP = "RepeatTrigger";
+  private static final String TRIGGER_GROUP = "TuesdayTrigger";
 
   @Override
-  public Trigger createTrigger(LocalDate startDate, LocalTime startTime) {
+  public Trigger createTrigger(String triggerName, LocalDate startDate, LocalTime startTime) {
     LOGGER.info("Start create tuesday repeat trigger. Execution date-time: {} : {}", startDate, startTime);
     return TriggerBuilder.newTrigger()
-        .withIdentity(TRIGGER_NAME + UUID.randomUUID(), TRIGGER_GROUP)
+        .withIdentity(triggerName, TRIGGER_GROUP)
         .withSchedule(atHourAndMinuteOnGivenDaysOfWeek(startTime.getHour(), startTime.getMinute(), DateBuilder.TUESDAY))
         .build();
   }

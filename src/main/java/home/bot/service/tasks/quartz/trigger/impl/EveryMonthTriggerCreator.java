@@ -13,19 +13,18 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.stereotype.Service;
 
-@Service("everyMonthTrig")
+@Service("everyMonthTrigger")
 @Slf4j(topic = "TRIGGER_CREATOR")
 public class EveryMonthTriggerCreator implements TriggerCreatorService {
 
-  private static final String TRIGGER_NAME = "EveryMonthTrigger";
-  private static final String TRIGGER_GROUP = "RepeatTrigger";
+  private static final String TRIGGER_GROUP = "EveryMonthTrigger";
 
   @Override
-  public Trigger createTrigger(LocalDate startDate, LocalTime startTime) {
+  public Trigger createTrigger(String triggerName, LocalDate startDate, LocalTime startTime) {
     LOGGER.info("Start create every month trigger. Execution date-time: {} : {}", startDate, startTime);
     LocalDateTime dateTime = LocalDateTime.of(startDate, startTime);
     return TriggerBuilder.newTrigger()
-        .withIdentity(TRIGGER_NAME + UUID.randomUUID(), TRIGGER_GROUP)
+        .withIdentity(triggerName, TRIGGER_GROUP)
         .startAt(Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant()))
         .withSchedule(CalendarIntervalScheduleBuilder.calendarIntervalSchedule()
             .withIntervalInMonths(1))

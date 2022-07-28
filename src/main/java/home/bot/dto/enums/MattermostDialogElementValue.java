@@ -55,7 +55,6 @@ public enum MattermostDialogElementValue {
       null,"Опиши каждый комментарий с новой строки.", TEXTAREA, false),
 
   //tasks
-  //name, taskType (для пользователей просто Notify, остальные для админов), taskPeriod, executionDate, executionTime, (само задание какое-нибудь)
   USER_TASK_NAME("userTaskName", "Название.",  null,"Война войной, а обед по расписанию", TEXT, false),
   USER_TASK_TYPE("userTaskType", "Тип.",  null, "Напоминалка", SELECT, false),
   USER_TASK_PERIOD("userTaskPeriod", "Повторяющийся?.",  null, "Каждую пятницу", SELECT, false),
@@ -85,11 +84,6 @@ public enum MattermostDialogElementValue {
 
   public static final Map<String, BiConsumer<UserPointDto, String>> MM_USER_POINTS_CREATE =
       Map.of(
-//          DAILY_POINTS_JIRA_TASKS.getName(), ((dailyPointsDto, jiraTasks) -> {
-//            if (StringUtils.isNotBlank(jiraTasks)) {
-//              dailyPointsDto.setJiraTasks(Set.of(jiraTasks.split("\n")));
-//            }
-//          }),
           USER_POINTS_TYPES.getName(), ((userPointDto, pointType) -> {
             userPointDto.setType(PointType.valueOf(pointType));
           }),
@@ -98,11 +92,6 @@ public enum MattermostDialogElementValue {
               userPointDto.setOpenQuestions(Set.of(openQuestions.split("\n")));
             }
           })
-//          , DAILY_POINTS_OTHER_PROBLEMS.getName(), ((dailyPointsDto, otherProblems) -> {
-//            if (StringUtils.isNotBlank(otherProblems)) {
-//              dailyPointsDto.setOtherProblems(Set.of(otherProblems.split("\n")));
-//            }
-//          })
       );
 
   public static final Map<String, BiConsumer<CreateGroupDto, String>> MM_CREATE_GROUP_MAPPING =

@@ -117,12 +117,6 @@ public class PointsServiceImpl implements PointsService {
   }
 
   private Point updatePoint(Point point, UserPointDto userPointDto) {
-//    if (Objects.nonNull(dailyPointsDto.getJiraTasks()) || !dailyPointsDto.getJiraTasks().isEmpty()) {
-//      point.getJiraTasksToTalk().addAll(dailyPointsDto.getJiraTasks());
-//    }
-//    if (Objects.nonNull(dailyPointsDto.getOtherProblems()) || !dailyPointsDto.getOtherProblems().isEmpty()) {
-//      point.getBesit().addAll(dailyPointsDto.getOtherProblems());
-//    }
     if (Objects.nonNull(userPointDto.getOpenQuestions()) || !userPointDto.getOpenQuestions().isEmpty()) {
       point.getQuestions().addAll(createQuestions(userPointDto.getOpenQuestions()));
     }

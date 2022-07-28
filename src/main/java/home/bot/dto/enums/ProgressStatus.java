@@ -6,5 +6,5 @@ import lombok.Getter;
 public enum ProgressStatus {
   IN_PROGRESS,
   DONE,
-  OUTDATED; //устарело
+  OUTDATED;
 }

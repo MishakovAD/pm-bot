@@ -46,9 +46,7 @@ public enum MattermostBotMenuButton {
   public static final List<MattermostBotMenuButton> POINTS_TYPES_USER_BUTTONS = List.of(GET_DAILY_POINTS_BUTTON,
       GET_PERSONAL_POINTS_BUTTON); //после нажатия RETURN_POINTS_TYPES_BUTTON -> возвращается весь список кнопок
 
-  public static final List<MattermostBotMenuButton> POINTS_ACTIONS_USER_BUTTONS = List.of(DONE_POINT_BUTTON
-//      ADD_NEW_QUESTIONS_TO_POINT_BUTTON, ADD_COMMENT_TO_QUESTION_BUTTON //todo: после MVP
-  );
+  public static final List<MattermostBotMenuButton> POINTS_ACTIONS_USER_BUTTONS = List.of(DONE_POINT_BUTTON);
 
   public static final List<MattermostBotMenuButton> ADMIN_MENU_BUTTONS = List.of(ADMIN_CREATE_GROUP_BUTTON,
       ADMIN_ADD_USER_TO_GROUP_BUTTON

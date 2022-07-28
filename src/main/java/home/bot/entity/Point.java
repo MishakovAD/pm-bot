@@ -52,14 +52,6 @@ public class Point extends BaseEntity<Long>{
     @Enumerated(EnumType.STRING)
     private PointType pointType;
 
-//    @Type(type = "jsonb")
-//    @Column(name = "jira_tasks_to_talk", columnDefinition = "jsonb")
-//    private Set<String> jiraTasksToTalk = new HashSet<>();
-//
-//    @Type(type = "jsonb")
-//    @Column(name = "besit", columnDefinition = "jsonb")
-//    private Set<String> besit = new HashSet<>();
-
     @JoinColumn(name = "POINT_ID")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Question> questions = new HashSet<>();
