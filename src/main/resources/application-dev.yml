@@ -1,0 +1,57 @@
+server:
+  port: 80
+spring:
+  application:
+    name: bot
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  datasource:
+    url: jdbc:postgresql://localhost:5432/telegrambot
+    driverClassName: org.postgresql.Driver
+    username: telegrambotadmin
+    password: TelegramBotAdmin_123
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        cache:
+          use_query_cache: true
+          use_second_level_cache: true
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+        show_sql: true
+        format_sql: true
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _LOG
+
+#todo: разобраться, как правильно настроить logback
+#logging:
+#  config: src/main/resources/logback.xml
+
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+    job-execution:
+      enabled: true
+
+telegram:
+  #Можно научить словарю английского и обучению слов todo: идея
+  api-url: 'https://api.telegram.org/'
+  webhook-path: 'https://da86-176-15-240-8.eu.ngrok.io'
+  token: '5108380387:AAHHeWBp-Qd-8Dix2ZNaOkJaRDoUteRBXzg'
+  name: '@Easy_StandUp_bot'
+
+mattermost:
+  bot-token: 'xsd4foph5pbfdxa49xwxrr3hza'
+  bot-id: '8hqo55ibi3b9feq93rstbxiu3c'
+  host: 'http://127.0.0.1:8065'
+  response-host: 'http://host.docker.internal:80'

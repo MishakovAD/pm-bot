@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_04qcd5j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:collaboration id="Collaboration_1vmuebd">
+    <bpmn:participant id="Participant_143c0n2" name="01_TG_User_Registration" processRef="tg_user_registration" />
+  </bpmn:collaboration>
+  <bpmn:process id="tg_user_registration" name="01_TG_User_Registration" isExecutable="true">
+    <bpmn:startEvent id="Event_0shebgr">
+      <bpmn:outgoing>Flow_11csuac</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_11csuac" sourceRef="Event_0shebgr" targetRef="tgUserFullName" />
+    <bpmn:sequenceFlow id="Flow_05u7rlk" sourceRef="tgUserFullName" targetRef="tgUserBirth" />
+    <bpmn:sequenceFlow id="Flow_0hp21p8" sourceRef="tgUserBirth" targetRef="tgUserRole" />
+    <bpmn:sequenceFlow id="Flow_1iq8exi" sourceRef="tgUserRole" targetRef="tgUserEmail" />
+    <bpmn:sequenceFlow id="Flow_1onoeux" sourceRef="tgUserEmail" targetRef="tgUserPhone" />
+    <bpmn:sequenceFlow id="Flow_0dtydtq" sourceRef="tgUserPhone" targetRef="Activity_1tp06l8" />
+    <bpmn:endEvent id="Event_18rxzyj">
+      <bpmn:incoming>Flow_0ncogns</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ncogns" sourceRef="Activity_1tp06l8" targetRef="Event_18rxzyj" />
+    <bpmn:receiveTask id="tgUserFullName" name="Ввести ФИО" camunda:asyncBefore="true" messageRef="Message_3o3054k">
+      <bpmn:incoming>Flow_11csuac</bpmn:incoming>
+      <bpmn:outgoing>Flow_05u7rlk</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="tgUserBirth" name="Ввести дату рождения" camunda:asyncBefore="true" messageRef="Message_09tl8m5">
+      <bpmn:incoming>Flow_05u7rlk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hp21p8</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="tgUserRole" name="Ввести роль в команде" camunda:asyncBefore="true" messageRef="Message_0fka665">
+      <bpmn:incoming>Flow_0hp21p8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1iq8exi</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="tgUserEmail" name="Ввести email" camunda:asyncBefore="true" messageRef="Message_00j9l06">
+      <bpmn:incoming>Flow_1iq8exi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1onoeux</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:receiveTask id="tgUserPhone" name="Ввести номер телефона" camunda:asyncBefore="true" messageRef="Message_0dpqgn1">
+      <bpmn:incoming>Flow_1onoeux</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dtydtq</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:serviceTask id="Activity_1tp06l8" name="Сохранить полученные данные о пользователе" camunda:asyncBefore="true" camunda:delegateExpression="${tgUserRegistrationSave}">
+      <bpmn:incoming>Flow_0dtydtq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ncogns</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_3o3054k" name="TG_FULL_USER_NAME" />
+  <bpmn:message id="Message_09tl8m5" name="TG_USER_BIRTH" />
+  <bpmn:message id="Message_0fka665" name="TG_USER_ROLE" />
+  <bpmn:message id="Message_00j9l06" name="TG_USER_EMAIL" />
+  <bpmn:message id="Message_0dpqgn1" name="TG_USER_PHONE" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1vmuebd">
+      <bpmndi:BPMNShape id="Participant_143c0n2_di" bpmnElement="Participant_143c0n2" isHorizontal="true">
+        <dc:Bounds x="170" y="80" width="1258" height="250" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ncogns_di" bpmnElement="Flow_0ncogns">
+        <di:waypoint x="1230" y="190" />
+        <di:waypoint x="1292" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dtydtq_di" bpmnElement="Flow_0dtydtq">
+        <di:waypoint x="1070" y="190" />
+        <di:waypoint x="1130" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1onoeux_di" bpmnElement="Flow_1onoeux">
+        <di:waypoint x="910" y="190" />
+        <di:waypoint x="970" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iq8exi_di" bpmnElement="Flow_1iq8exi">
+        <di:waypoint x="750" y="190" />
+        <di:waypoint x="810" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hp21p8_di" bpmnElement="Flow_0hp21p8">
+        <di:waypoint x="590" y="190" />
+        <di:waypoint x="650" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05u7rlk_di" bpmnElement="Flow_05u7rlk">
+        <di:waypoint x="430" y="190" />
+        <di:waypoint x="490" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11csuac_di" bpmnElement="Flow_11csuac">
+        <di:waypoint x="278" y="190" />
+        <di:waypoint x="330" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0shebgr_di" bpmnElement="Event_0shebgr">
+        <dc:Bounds x="242" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_18rxzyj_di" bpmnElement="Event_18rxzyj">
+        <dc:Bounds x="1292" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1g6xu0f_di" bpmnElement="tgUserFullName">
+        <dc:Bounds x="330" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0snnk0w_di" bpmnElement="tgUserBirth">
+        <dc:Bounds x="490" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01kg55t_di" bpmnElement="tgUserRole">
+        <dc:Bounds x="650" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0kr0qts_di" bpmnElement="tgUserEmail">
+        <dc:Bounds x="810" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0wmycwf_di" bpmnElement="tgUserPhone">
+        <dc:Bounds x="970" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02f8wac_di" bpmnElement="Activity_1tp06l8">
+        <dc:Bounds x="1130" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

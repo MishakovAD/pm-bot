@@ -1,0 +1,74 @@
+<configuration>
+
+  <appender name="DEV-LOCAL" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>true</withJansi>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d{ISO8601} [%thread] [%-5level] [%logger{36}] - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="PRIMARY" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>true</withJansi>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp>
+          <timeZone>UTC</timeZone>
+        </timestamp>
+        <logLevel/>
+        <loggerName/>
+        <tags/>
+        <mdc/>
+        <pattern>
+          <pattern>
+            <![CDATA[
+                            {
+                              "pid": "${PID:-}",
+                              "thread": "%thread",
+                              "class": "%logger",
+                              "message": "%message"
+                            }
+                        ]]>
+          </pattern>
+        </pattern>
+        <stackTrace>
+          <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+            <maxDepthPerThrowable>60</maxDepthPerThrowable>
+            <maxLength>4096</maxLength>
+            <shortenedClassNameLength>20</shortenedClassNameLength>
+            <exclude>^sun\.reflect\..*\.invoke</exclude>
+            <exclude>^net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+            <exclude>^org\.apache\.cxf\..*\.invoke</exclude>
+            <exclude>^org\.springframework\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+            <exclude>
+              ^org\.springframework\.aop\.framework\.CglibAopProxy\$DynamicAdvisedInterceptor\..*\.intercept
+            </exclude>
+            <rootCauseFirst>true</rootCauseFirst>
+          </throwableConverter>
+        </stackTrace>
+      </providers>
+    </encoder>
+  </appender>
+
+  <logger name="jdbc.resultset" level="WARN"/>
+  <logger name="jdbc.audit" level="WARN"/>
+  <logger name="jdbc.sqlonly" level="WARN"/>
+  <logger name="jdbc.sqltiming" level="WARN"/>
+  <logger name="jdbc.connection" level="WARN"/>
+  <logger name="org.apache.ignite" level="WARN"/>
+  <logger name="com.netflix" level="ERROR"/>
+  <logger name="org.hibernate.engine" level="WARN"/>
+
+  <springProfile name="dev">
+    <root level="info">
+      <appender-ref ref="DEV-LOCAL"/>
+    </root>
+  </springProfile>
+
+  <springProfile name="!dev">
+    <root level="info">
+      <appender-ref ref="PRIMARY"/>
+    </root>
+  </springProfile>
+
+</configuration>

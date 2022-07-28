@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+  <defaultCache eternal="false"
+    timeToLiveSeconds="300"
+    timeToIdleSeconds="300"
+    maxBytesLocalHeap="128M"
+    memoryStoreEvictionPolicy="LFU">
+  </defaultCache>
+</ehcache>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_068nbql" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <decision id="tg_registration_answer_text" name="Aswer tex for TG_REG">
+    <decisionTable id="DecisionTable_1ewt4pe">
+      <input id="Input_1" label="activityName" camunda:inputVariable="activityName">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="message" name="message" typeRef="string" />
+      <output id="OutputClause_06vq9e7" label="correlateMessageVal" name="correlateMessageVal" typeRef="string" />
+      <output id="OutputClause_1j9xjn2" label="resultVarName" name="resultVarName" typeRef="string" />
+      <rule id="DecisionRule_1wahb65">
+        <inputEntry id="UnaryTests_1mwxp0j">
+          <text>"tgUserFullName"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1cw2a7y">
+          <text>"Введите дату рождения в формате: ДД.ММ.ГГГГ"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f28j4r">
+          <text>"TG_FULL_USER_NAME"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_04zgw45">
+          <text>"fullName"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1x57pzz">
+        <inputEntry id="UnaryTests_1bwq8im">
+          <text>"tgUserBirth"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pn42ag">
+          <text>"Выберете позицию, которую занимаете."</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0xn0j7f">
+          <text>"TG_USER_BIRTH"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ov65f9">
+          <text>"birthday"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0dl6blj">
+        <inputEntry id="UnaryTests_0hlj3t2">
+          <text>"tgUserRole"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0l6udv8">
+          <text>"Введите рабочий email."</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06w6r92">
+          <text>"TG_USER_ROLE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qj2nr6">
+          <text>"userRole"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0thfjs5">
+        <inputEntry id="UnaryTests_1ip5c6g">
+          <text>"tgUserEmail"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0e2s651">
+          <text>"Введите  номер телефона с +7 без пробелов и регистрации."</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ssa0ut">
+          <text>"TG_USER_EMAIL"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_12i3q6i">
+          <text>"userEmail"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04whegv">
+        <inputEntry id="UnaryTests_0t5fjq4">
+          <text>"tgUserPhone"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0igwckd">
+          <text>"Спасибо за регистрацию!"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0yiv6kk">
+          <text>"TG_USER_PHONE"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ncv3lp">
+          <text>"userPhone"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="tg_registration_answer_text">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
